@@ -46,6 +46,13 @@ public class TscPrinter extends CordovaPlugin {
                 callbackContext.error(err.getMessage());
             }
             return true;
+        }else if(action.equals("setupPrinter")){
+            try {
+                callbackContext.success(this.setupPrinter(args));
+            }catch (Error err){
+                callbackContext.error(err.getMessage());
+            }
+            return true;
         }
         return false;
     }
@@ -55,7 +62,14 @@ public class TscPrinter extends CordovaPlugin {
         return TscDll.openport(macAddress);
     }
 
-    private String setUpPrinter(Integer width,Integer height,Integer speed, Integer density,Integer sensor,Integer sensor_distance,Integer sensor_offset){
+    private String setupPrinter(JSONArray args) throws JSONException {
+        Integer width = args.getInt(0);
+        Integer height = args.getInt(1);
+        Integer speed = args.getInt(2);
+        Integer density = args.getInt(3);
+        Integer sensor = args.getInt(4);
+        Integer sensor_distance = args.getInt(5);
+        Integer sensor_offset = args.getInt(6);
         return TscDll.setup(width,height,speed,density,sensor,sensor_distance,sensor_offset);
     }
 
@@ -69,7 +83,8 @@ public class TscPrinter extends CordovaPlugin {
         Integer narrow = args.getInt(6);
         Integer wide = args.getInt(7);
         String content = args.getString(8);
-        return TscDll.barcode(x,y,type,height,human_readable,rotation,narrow,wide,content);
+        TscDll.barcode(x,y,type,height,human_readable,rotation,narrow,wide,content);
+        return this.printLabel(1,1);
     }
 
     private String printLabel(Integer quantity,Integer copy){
