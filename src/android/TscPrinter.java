@@ -53,6 +53,30 @@ public class TscPrinter extends CordovaPlugin {
                 callbackContext.error(err.getMessage());
             }
             return true;
+        }else if(action.equals("sendCommand")){
+            try {
+                callbackContext.success(this.sendCommand(args));
+            }catch (Error err){
+                callbackContext.error(err.getMessage());
+            }
+        }else if(action.equals("printLabel")){
+            try {
+                callbackContext.success(this.printLabel(args));
+            }catch (Error err){
+                callbackContext.error(err.getMessage());
+            }
+        }else if(action.equals("clearBuffer")){
+            try {
+                callbackContext.success(this.clearBuffer());
+            }catch (Error err){
+                callbackContext.error(err.getMessage());
+            }
+        }else if(action.equals("closeConnection")){
+            try {
+                callbackContext.success(this.disconnect());
+            }catch (Error err){
+                callbackContext.error(err.getMessage());
+            }
         }
         return false;
     }
@@ -83,8 +107,7 @@ public class TscPrinter extends CordovaPlugin {
         Integer narrow = args.getInt(6);
         Integer wide = args.getInt(7);
         String content = args.getString(8);
-        TscDll.barcode(x,y,type,height,human_readable,rotation,narrow,wide,content);
-        return this.printLabel(1,1);
+        return TscDll.barcode(x,y,type,height,human_readable,rotation,narrow,wide,content);
         /*
                     TscDll.setup(70, 110, 4, 4, 0, 0, 0);
                     TscDll.clearbuffer();
@@ -98,16 +121,27 @@ public class TscPrinter extends CordovaPlugin {
         */
     }
 
-    private String printLabel(Integer quantity,Integer copy){
+    private String printLabel(JSONArray args) throws JSONException {
+        Integer quantity = args.getInt(0);
+        Integer copy = args.getInt(1);
         return TscDll.printlabel(quantity, copy);
     }
 
-    private String Disconnect(){
+    private String sendCommand(JSONArray args) throws JSONException {
+        String command = args.getString(0);
+        return TscDll.sendcommand(command);
+    }
+
+    private String disconnect(){
         return TscDll.closeport();
     }
 
     private String getStatus(){
         return TscDll.status();
+    }
+
+    private String clearBuffer(){
+        return TscDll.clearbuffer();
     }
 
 }
