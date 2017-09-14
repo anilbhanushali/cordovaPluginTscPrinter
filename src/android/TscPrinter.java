@@ -85,6 +85,17 @@ public class TscPrinter extends CordovaPlugin {
         String content = args.getString(8);
         TscDll.barcode(x,y,type,height,human_readable,rotation,narrow,wide,content);
         return this.printLabel(1,1);
+        /*
+                    TscDll.setup(70, 110, 4, 4, 0, 0, 0);
+                    TscDll.clearbuffer();
+                    TscDll.sendcommand("SET TEAR ON\n");
+                    TscDll.sendcommand("SET COUNTER @1 1\n");
+                    TscDll.sendcommand("@1 = \"0001\"\n");
+                    TscDll.sendcommand("TEXT 100,300,\"3\",0,1,1,@1\n");
+                    TscDll.barcode(100, 100, "128", 100, 1, 0, 3, 3, "123456789");
+                    TscDll.printerfont(100, 250, "3", 0, 1, 1, "987654321");
+                    TscDll.printlabel(2, 1);
+        */
     }
 
     private String printLabel(Integer quantity,Integer copy){

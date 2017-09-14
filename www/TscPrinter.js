@@ -11,3 +11,19 @@ exports.connectPrinter = function (address, success, error) {
 exports.printBarCode = function (args, success, error) {
     exec(success, error, 'TscPrinter', 'printBarCode', args);
 };
+
+exports.sendCommand = function (args, success, error) {
+    exec(success, error, 'TscPrinter', 'sendCommand', args);
+};
+
+exports.printLabel = function (args, success, error) {
+    exec(success, error, 'TscPrinter', 'printLabel', args);
+};
+
+exports.clearBuffer = function (args, success, error) {
+    exec(success, error, 'TscPrinter', 'clearBuffer', args);
+};
+
+exports.closeConnection = function (args, success, error) {
+    exec(success, error, 'TscPrinter', 'closeConnection', args);
+};
