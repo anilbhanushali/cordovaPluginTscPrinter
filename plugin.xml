@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-tsc-printer" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
-    <name>TscPrinter</name>
+<plugin id="cordova-plugin-tsc" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>Cordova Plugin Tsc</name>
     <js-module name="TscPrinter" src="www/TscPrinter.js">
         <clobbers target="window.TscPrinter" />
     </js-module>

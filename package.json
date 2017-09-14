@@ -1,0 +1,11 @@
+{
+  "name": "cordova-plugin-tsc",
+  "version": "1.0.0",
+  "cordova": {
+    "id": "cordova-plugin-tsc",
+    "platforms": [
+      "android"
+    ]
+  },
+  "description": "A cordova plugin for TSC portable bluetooth printer"
+}
